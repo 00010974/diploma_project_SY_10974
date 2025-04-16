@@ -35,12 +35,7 @@ class AuthService {
   Future<void> signOut() async => await _auth.signOut();
 
   Future<String> getUserRole(String uid) async {
-    try {
-      DocumentSnapshot doc =
-          await FirebaseFirestore.instance.collection('users').doc(uid).get();
-      return doc['role'] ?? 'student'; // ЕСЛИ РОЛЬ НЕ УКАЗАНА, ВЕРНЕТ 'STUDENT'
-    } catch (e) {
-      return 'students'; //в случае ошибки тоже вернет 'student'
-    }
+    final doc = await FirebaseFirestore.instance.collection('users').doc(uid).get();
+    return doc['role'] ?? 'student';
   }
 }
