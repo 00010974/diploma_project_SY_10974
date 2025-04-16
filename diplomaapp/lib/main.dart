@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 import 'pages/auth/login_page.dart';
+import 'pages/auth/login_ui_page.dart';
 import 'pages/dashboard/admin_dashboard.dart';
 import 'pages/dashboard/instructor_dashboard.dart';
 import 'pages/dashboard/student_dashboard.dart';
 import 'services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart'; 
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,7 +40,7 @@ class AuthWrapper extends StatelessWidget {
         }
         
         final user = snapshot.data;
-        if (user == null) return LoginPage();
+        if (user == null) return LoginUIPage();
 
         // Получаем роль из Firestore
         return FutureBuilder<String>(
