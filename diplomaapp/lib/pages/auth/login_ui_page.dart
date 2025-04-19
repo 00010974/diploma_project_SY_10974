@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/auth_service.dart';
+import '../auth/signup_ui_page.dart';
 
 class LoginUIPage extends StatefulWidget {
   const LoginUIPage({super.key});
@@ -82,18 +83,28 @@ class _LoginUIPageState extends State<LoginUIPage> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                     ),
-                    child: const Text("Sign In", style: TextStyle(fontSize: 16)),
+                    child: const Text("Sign In", style: TextStyle(fontSize: 16, color: Color.fromARGB(255, 244, 243, 246))),
                   ),
                   const SizedBox(height: 16),
                   Center(
                     child: RichText(
                       text: TextSpan(
-                        text: "doesn’t have an account? ",
+                        text: "Doesn't have an account? ",
                         style: const TextStyle(color: Colors.black),
                         children: [
-                          TextSpan(
-                            text: "Sign Up",
-                            style: const TextStyle(color: Color(0xFF6A5AE0)),
+                          WidgetSpan(
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (_) => const SignUpUIPage()),
+                                );
+                              },
+                              child: const Text(
+                                "Sign Up",
+                                style: TextStyle(color: Color(0xFF6A5AE0), fontWeight: FontWeight.bold),
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -108,7 +119,7 @@ class _LoginUIPageState extends State<LoginUIPage> {
           // RIGHT
           if (width > 900)
             Expanded(
-              flex: 1,
+              flex: 2,
               child: Container(
                 decoration: const BoxDecoration(
                   color: Color(0xFF6A5AE0),
