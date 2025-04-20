@@ -7,13 +7,14 @@ import 'pages/dashboard/instructor_dashboard.dart';
 import 'pages/dashboard/student_dashboard.dart';
 import 'services/auth_service.dart';
 import 'package:firebase_auth/firebase_auth.dart'; 
-
+import 'package:diplomaapp/services/notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationService.init();
   runApp(MyApp());
 }
 

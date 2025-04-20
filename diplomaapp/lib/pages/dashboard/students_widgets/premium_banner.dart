@@ -12,7 +12,7 @@ class PremiumBanner extends StatelessWidget {
         color: const Color(0xFF6A5AE0),
         borderRadius: BorderRadius.circular(16),
         image: const DecorationImage(
-          image: NetworkImage('https://i.imgur.com/Vz6FCOy.png'),
+          image: NetworkImage(''),
           fit: BoxFit.cover,
           alignment: Alignment.centerRight,
         ),

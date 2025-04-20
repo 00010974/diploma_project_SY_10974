@@ -71,7 +71,7 @@ class Sidebar extends StatelessWidget {
                     ),
                     child: Text(
                       "Get Premium",
-                      style: TextStyle(color: Color(0xFF6A5AE0)),
+                      style: TextStyle(color: Colors.white),
                     ),
                   ),
                 ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'notification_panel.dart';
 import '../../../services/auth_service.dart'; // для выхода
+import 'package:diplomaapp/pages/profile/profile_page.dart';
 
 class TopBar extends StatefulWidget {
   const TopBar({super.key});
@@ -88,9 +89,12 @@ class _TopBarState extends State<TopBar> {
             if (value == 'logout') {
               _logout(context);
             } else if (value == 'profile') {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Profile page coming soon!')),
-              );
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProfilePage(user: FirebaseAuth.instance.currentUser!),
+                  ),
+                );
             } else if (value == 'settings') {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Settings page coming soon!')),
