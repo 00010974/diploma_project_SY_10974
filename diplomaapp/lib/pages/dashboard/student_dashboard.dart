@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../dashboard/students_widgets/calendar_widget.dart';
-import '../dashboard/students_widgets/course_card.dart';
-import '../dashboard/students_widgets/premium_banner.dart';
-import '../dashboard/students_widgets/schedule_widget.dart';
-import '../dashboard/students_widgets/sidebar.dart';
-import '../dashboard/students_widgets/tasks_list.dart';
-import '../dashboard/students_widgets/topbar.dart';
+import '../widgets/calendar_widget.dart';
+import '../widgets/course_card.dart';
+import '../widgets/premium_banner.dart';
+import '../widgets/schedule_widget.dart';
+import '../widgets/sidebar.dart';
+import '../widgets/tasks_list.dart';
+import '../widgets/topbar.dart';
 import '../courses/course_details_page.dart';
 
 class StudentDashboard extends StatefulWidget {
@@ -86,13 +86,13 @@ class _StudentDashboardState extends State<StudentDashboard> {
       backgroundColor: const Color(0xFFF9F9F9),
       body: Row(
         children: [
-          const Sidebar(),
+          const Sidebar(selectedMenu: "Dashboard"),
           Expanded(
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
                 children: [
-                  const TopBar(),
+                  TopBar(pageTitle: "Dashboard"),
                   const SizedBox(height: 24),
                   const PremiumBanner(),
                   const SizedBox(height: 24),
