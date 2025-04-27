@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import '../../services/auth_service.dart';
 import '../auth/signup_ui_page.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class LoginUIPage extends StatefulWidget {
   const LoginUIPage({super.key});
@@ -18,17 +20,44 @@ class _LoginUIPageState extends State<LoginUIPage> {
   String? _error;
 
   Future<void> _signIn() async {
-    try {
-      setState(() => _error = null);
-      final email = _emailController.text.trim();
-      final password = _passwordController.text.trim();
-      await _auth.signInWithEmail(email, password);
-    } on FirebaseAuthException catch (e) {
-      setState(() => _error = e.message);
-    } catch (e) {
-      setState(() => _error = "Unknown error");
+  try {
+    setState(() => _error = null);
+    final email = _emailController.text.trim();
+    final password = _passwordController.text.trim();
+
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: email,
+      password: password,
+    );
+
+    final uid = userCredential.user!.uid;
+
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get();
+
+    if (!doc.exists || !doc.data()!.containsKey('role')) {
+      setState(() => _error = "User role not found.");
+      return;
     }
+
+    final role = doc['role'];
+
+    if (role == 'teacher') {
+      Navigator.pushReplacementNamed(context, '/teacherDashboard');
+    } else if (role == 'student') {
+      Navigator.pushReplacementNamed(context, '/studentDashboard');
+    } else {
+      setState(() => _error = "Unknown role.");
+    }
+  } on FirebaseAuthException catch (e) {
+    setState(() => _error = e.message);
+  } catch (e) {
+    setState(() => _error = "Unknown error");
   }
+}
 
   @override
   Widget build(BuildContext context) {

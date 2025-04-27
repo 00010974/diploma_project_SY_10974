@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "599811524565",
+    "project_id": "diploma-1f433",
+    "storage_bucket": "diploma-1f433.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599811524565:android:39463d2074838f15389f5c",
+        "android_client_info": {
+          "package_name": "com.example.diplomaapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "599811524565-m3g70ocjp4vains3g1iph3fj2r94sf3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZuX_B-V7jaG-fd3CryyRGAv1bDAYihUM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "599811524565-m3g70ocjp4vains3g1iph3fj2r94sf3d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

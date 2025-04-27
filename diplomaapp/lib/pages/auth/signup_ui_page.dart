@@ -50,6 +50,12 @@ class _SignUpUIPageState extends State<SignUpUIPage> {
           'role': _selectedRole, // 👈 сохраняем выбранную роль
           'createdAt': DateTime.now(),
         });
+      
+        if (_selectedRole == 'instructor') {
+          Navigator.pushReplacementNamed(context, '/teacherDashboard');
+        } else {
+          Navigator.pushReplacementNamed(context, '/studentDashboard');
+        }
       }
     } on FirebaseAuthException catch (e) {
       setState(() => _error = e.message);

@@ -1,3 +1,4 @@
+// import 'package:diplomaapp/pages/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:diplomaapp/pages/schedule/schedulePage.dart';
 import 'package:diplomaapp/pages/message/message_page.dart';

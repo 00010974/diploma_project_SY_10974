@@ -4,6 +4,7 @@ import 'dart:io';
 import '../../services/course_service.dart';
 import '../../models/course.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:diplomaapp/models/course.dart';
 
 class CreateCoursePage extends StatefulWidget {
   @override
@@ -44,7 +45,9 @@ class _CreateCoursePageState extends State<CreateCoursePage> {
       instructorId: uid,
       videoUrl: videoUrl,
       pdfUrl: pdfUrl,
-      enrolledStudents: [],
+      studentStatuses: {},
+      enrolledStudentIds: [],
+      homework: {},
     );
 
     await _courseService.createCourse(course);

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:diplomaapp/models/course.dart';
+import 'package:diplomaapp/models/lesson.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:diplomaapp/services/course_service.dart';
 
 import '../widgets/calendar_widget.dart';
 import '../widgets/course_card.dart';
@@ -114,66 +118,42 @@ class _StudentDashboardState extends State<StudentDashboard> {
                               ),
                               const SizedBox(height: 12),
                               SizedBox(
-                                height: 160,
-                                child: ListView(
-                                  scrollDirection: Axis.horizontal,
-                                  children: [
-                                    CourseCard(
-                                      title:
-                                          "Envato Mastery: Build Passive Income",
-                                      hoursTaken: 3.2,
-                                      totalHours: 10,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (_) => const CourseDetailPage(
-                                                  title:
-                                                      "Envato Mastery: Build Passive Income",
+                                height: 180,
+                                child: StreamBuilder<List<Course>>(
+                                  stream: CourseService().getStudentCourses(FirebaseAuth.instance.currentUser!.uid),
+                                  builder: (context, snapshot) {
+                                    if (!snapshot.hasData) return const Center(child: CircularProgressIndicator());
+
+                                    final courses = snapshot.data!;
+                                    if (courses.isEmpty) return const Text("You are not enrolled in any courses.");
+
+                                    return ListView.builder(
+                                      scrollDirection: Axis.horizontal,
+                                      itemCount: courses.length,
+                                      itemBuilder: (context, index) {
+                                        final course = courses[index];
+                                        return Padding(
+                                          padding: const EdgeInsets.only(right: 12.0),
+                                          child: CourseCard(
+                                            title: course.title,
+                                            hoursTaken: 3.2, // TODO: Заменить на реальное время, если есть
+                                            totalHours: 10, // TODO: или убрать
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (_) => CourseDetailPage(course: course),
                                                 ),
+                                              );
+                                            },
                                           ),
                                         );
                                       },
-                                    ),
-                                    CourseCard(
-                                      title:
-                                          "Mastering Git & Vercel Deployment",
-                                      hoursTaken: 2.5,
-                                      totalHours: 6,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (_) => const CourseDetailPage(
-                                                  title:
-                                                      "Mastering Git & Vercel Deployment",
-                                                ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                    CourseCard(
-                                      title: "Advanced Flutter Web Techniques",
-                                      hoursTaken: 1.0,
-                                      totalHours: 8,
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (_) => const CourseDetailPage(
-                                                  title:
-                                                      "Advanced Flutter Web Techniques",
-                                                ),
-                                          ),
-                                        );
-                                      },
-                                    ),
-                                  ],
+                                    );
+                                  },
                                 ),
                               ),
+
                               const SizedBox(height: 24),
                               const TasksList(),
                             ],
